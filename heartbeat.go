@@ -45,7 +45,7 @@ func Get(address string) (HeartbeatMessage, error) {
 	return message, nil
 }
 
-func handler(rw http.ResponseWriter, r *http.Request) {
+func Handler(rw http.ResponseWriter, r *http.Request) {
 	hash := CommitHash
 	if hash == "" {
 		hash = NotAvailableMessage
@@ -58,6 +58,6 @@ func handler(rw http.ResponseWriter, r *http.Request) {
 }
 
 func RunHeartbeatService(address string) {
-	http.HandleFunc("/heartbeat", handler)
+	http.HandleFunc("/heartbeat", Handler)
 	log.Println(http.ListenAndServe(address, nil))
 }
